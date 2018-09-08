@@ -1,0 +1,47 @@
+* {
+
+}
+
+body {
+    
+}
+
+
+
+
+
+/* ******** MEDIA QUERIES ******** */
+@media screen and (max-width: 980px) {
+  .container {
+    max-width: 980px;
+  }
+
+  .main-section {
+    max-width: 980px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+
+  .main-section {
+    max-width: 768px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+
+  .main-section {
+    max-width: 640px;
+  }
+
+  nav {
+    float: left; 
+  }
+
+  }
