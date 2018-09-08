@@ -1,5 +1,6 @@
 // List all of the alpha array possibilities
-var computerChoices = ["Hulk", "Ironman", "Deadpool", "Thanos", "Wolverine", "Thor", "Nebula", "Magneto", "Gamora", "Rogue", "Mystique", "Rocket", "Gambit", "Beast", "Havok", "Drax", "Groot", "Daredevil", "Hawkeye", "Punisher", "Venom", "Colossus", "Psylocke", "Storm"];
+var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+var computerChoices = ["Hulk", "Ironman", "Deadpool", "Thanos", "Wolverine", "Thor", "Nebula", "Magneto", "Gamora", "Rogue", "Mystique", "Rocket", "Gambit", "Beast", "Havok", "Drax", "Groot", "Hawkeye", "Punisher", "Venom", "Colossus", "Psylocke", "Storm"];
 
 // Variables related to the scripting logic
 var wins = 0;
@@ -10,7 +11,7 @@ var computerChoice = "";
 var computerChoiceMasked = "";
 var guessesSoFar = "";
 var guessesSoFarArray = [];
-var randomMsgArray = ["BTW, Thor says you're adopted", "Loki killed 80 people in two days and you're next", "The Mandarin says you'll never see him coming", "Hulk yells <i>smash</i>", "Captain America says he can do this all day", "And Stark says we have a Hulk", "I am Groot. You're not.", "Daredevil reassures you that violence does not discriminate", "Wolverine says that if you cage the beast, the beast will get angry", "Spiderman says that no man can win every battle"]
+var randomMsgArray = ["BTW, Thor says you're adopted", "Loki killed 80 people in two days and you're next", "The Mandarin says you'll never see him coming", "Hulk yells smash", "Captain America says he can do this all day", "And Stark says we have a Hulk", "I am Groot. You're not.", "Daredevil reassures you that violence does not discriminate", "Wolverine says that if you cage the beast, the beast will get angry", "Spiderman says that no man can win every battle"]
 
 // Variables that refer to the HTML
 var winsText = document.getElementById("htmlWins");
@@ -24,24 +25,26 @@ var wordText = document.getElementById("htmlWord");
 
 // Global function to test for an alpha event.key
 function isAlpha(str) {
-  // for (i = 0; i < computerChoices.length; i++) {
-  //   if (str === computerChoices[i]) {
+  for (i = 0; i < alphabet.length; i++) {
+    if (str === alphabet[i]) {
       return true;
-    // } else { }
+    } else { }
   } // end of for loop
-  // return false;
-//} // end of isAlpha()
+  return false;
+} // end of isAlpha()
 
 // Global function to test for a duplicate event.key
 function isDuplicate(str) {
   for (i = 0; i < guessesSoFarArray.length; i++) {
     if (str === guessesSoFarArray[i]) {
       return true;
-    } else { }
+    }
+    else { 
+      // nothing
+    }
   } // end of for loop
   return false;
 } // end of isDuplicate()
-
 
 // KICK OFF THE GAME WITH A KEYSTROKE
 document.onkeyup = function (event) {
@@ -55,6 +58,7 @@ document.onkeyup = function (event) {
   var randomMsg = "";
   resultsMsgText.textContent = resultsMsg;
   randomMsgText.textContent = randomMsg;
+
 
   // guessesRemaining needs to be an integer. Not a string.
   guessesRemaining = parseInt(guessesRemaining);
@@ -82,8 +86,10 @@ document.onkeyup = function (event) {
     guessesSoFarArray.push(userGuessVetted);
 
     if (guessesRemaining == 10) {
-      // computerChoice randomizes using computerChoices EACH TIME there are 10 tries left during each match
+      // computerChoice randomizes using computerChoices EACH TIME there are 10 tries left and there is not a value already
       computerChoice = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+      console.log("computerChoice: " + computerChoice);
+    
       
       // Convert computerChoice letters to "*" in computerChoiceMasked
       // ******* MAGIC BEGINS *******
@@ -109,7 +115,7 @@ document.onkeyup = function (event) {
     // Do this by creating a whole new computerChoiceMasked
     // ******* MAGIC CONTINUES *******
     for (i = 0; i < computerChoice.length; i++) {
-      if (userGuess == computerChoice.charAt(i)) {
+      if (userGuess == computerChoice.toLowerCase().charAt(i)) {
         computerChoiceMasked = computerChoiceMasked.substr(0, i) + userGuess + computerChoiceMasked.substr(i + 1);
         console.log(computerChoiceMasked);
       }
@@ -124,25 +130,29 @@ document.onkeyup = function (event) {
 
 
     // Check for win or loss
-    if (computerChoiceMasked == computerChoice) {
+    if (computerChoiceMasked == computerChoice.toLowerCase()) {
       wins++;
       resultsMsg = "You won? Hmph.";
-      randomMsg = randomMsgArray[Math.floor(Math.random() * randomArray.length)];
-            //randomMsg = randomArray[randomIndex(randomArray)];
+      randomMsg = randomMsgArray[Math.floor(Math.random() * randomMsgArray.length)];
       // Reset malleable variables
       guessesRemaining = 10;
       guessesSoFar = "";
       guessesSoFarArray = [];
+      wordText.textContent = "";
+      computerChoiceMasked = "";
     }
-    else if ((guessesRemaining == 0) && (isAlpha(userGuessVetted) == true)) {
+    
+    // else if ((guessesRemaining < 1) && (isAlpha(userGuessVetted) == true)) {
+    else if (guessesRemaining < 1) {
       losses++;
       resultsMsg = "You lost to " + computerChoice;
-      randomMsg = randomMsgArray[Math.floor(Math.random() * randomArray.length)];
-            //randomMsg = randomArray[randomIndex(randomArray)];
+      randomMsg = randomMsgArray[Math.floor(Math.random() * randomMsgArray.length)];      
       // Reset due to end of match
       guessesRemaining = 10;
       guessesSoFar = "";
       guessesSoFarArray = [];
+      wordText.textContent = "";
+      // computerChoiceMasked = "";
     }
     else { } // do nothing
 
@@ -156,10 +166,9 @@ document.onkeyup = function (event) {
   lossesText.textContent = losses;
   guessesRemainingText.textContent = guessesRemaining;
   guessesSoFarText.textContent = guessesSoFar;
-  resultsText.textContent = resultsMsg;
-  randomText.textContent = randomMsg;
-
-
+  resultsMsgText.textContent = resultsMsg;
+  randomMsgText.textContent = randomMsg;
+  
 }; // End of document.onkeyup
 
 // END OF FILE
