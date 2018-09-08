@@ -1,47 +1,64 @@
 * {
-
+  /* Empty */
 }
 
 body {
-    
+  /* Empty */
+}
+
+.jumbotron {
+  margin: 0; /* Tweak Bootstrap's Jumbotron Margins */
+}
+
+h1 {
+  color:#c3002f;
 }
 
 
 
-
-
-/* ******** MEDIA QUERIES ******** */
-@media screen and (max-width: 980px) {
-  .container {
-    max-width: 980px;
-  }
-
-  .main-section {
-    max-width: 980px;
-  }
+.my-jumbotron-container {
+  padding: 0px; 
 }
 
-@media screen and (max-width: 768px) {
-  .container {
-    max-width: 768px;
-  }
-
-  .main-section {
-    max-width: 768px;
-  }
+.my-jumbotron-left {
+    background-color: #4694a5;
+    filter: brightness(130%);
+  padding-top: 0 0 0 0;
+}
+.my-jumbotron-right {
+  padding: 0;
+  margin: 0;
+  background-color: black
 }
 
-@media screen and (max-width: 640px) {
-  .container {
-    max-width: 640px;
-  }
+.my-jumbotron-right table {
+  margin: 0;
+}
 
-  .main-section {
-    max-width: 640px;
-  }
+.my-image-container {
+  background-color: black;
+  max-height: 100%;
+  min-height: 100%;
+  padding: 0;
+}
 
-  nav {
-    float: left; 
-  }
+.my-table {
+  border: none;
+}
 
-  }
+th {
+  text-align: right;
+  padding: 0 10px 0 0;
+}
+
+td {
+  text-align: left;
+  font-weight: bold;
+  padding: 0 0 0 10px;
+}
+
+#my-result p {
+  color: #c3002f;
+  font-weight: bold;
+  text-align: cemter;
+}
