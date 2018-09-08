@@ -7,6 +7,7 @@ var losses = 0;
 var guessesRemaining = 10;
 var userGuess = "";
 var computerChoice = "";
+var computerChoiceMasked = "";
 var guessesSoFar = "";
 var guessesSoFarArray = [];
 var randomMsgArray = ["BTW, Thor says you're adopted", "Loki killed 80 people in two days and you're next", "The Mandarin says you'll never see him coming", "Hulk yells <i>smash</i>", "Captain America says he can do this all day", "And Stark says we have a Hulk", "I am Groot. You're not.", "Daredevil reassures you that violence does not discriminate", "Wolverine says that if you cage the beast, the beast will get angry", "Spiderman says that no man can win every battle"]
@@ -19,15 +20,16 @@ var guessesSoFarText = document.getElementById("htmlGuessesSoFar");
 var resultsText = document.getElementById("htmlMessage");
 var directionsText = document.getElementById("htmlDirections");
 var randomText = document.getElementById("htmlRandom");
+var wordText = document.getElementById("htmlWord");
 
 // Global function to test for an alpha event.key
 function isAlpha(str) {
-  for (i = 0; i < computerChoices.length; i++) {
-    if (str === computerChoices[i]) {
+  // for (i = 0; i < computerChoices.length; i++) {
+  //   if (str === computerChoices[i]) {
       return true;
-    } else { }
+    // } else { }
   } // end of for loop
-  return false;
+  // return false;
 } // end of isAlpha()
 
 // Global function to test for a duplicate event.key
@@ -40,17 +42,6 @@ function isDuplicate(str) {
   return false;
 } // end of isDuplicate()
 
-// Global function to choose a random index number from an array
-// Used to choose the funny message after winning or losing
-function randomIndex(array) {
-  var i = array.length - 1;
-  return myArray[Math.floor(Math.random() * i)];
-}
-
-console.log(winsText); // ******* TESTING ********
-console.log(lossesText); // ******* TESTING ********
-console.log(guessesRemainingText); // ******* TESTING ********
-console.log(guessesSoFarText); // ******* TESTING ********
 
 // KICK OFF THE GAME WITH A KEYSTROKE
 document.onkeyup = function (event) {
@@ -62,30 +53,30 @@ document.onkeyup = function (event) {
   // Clears the You Won/You Lost message after a key is pressed
   var resultsMsg = "";
   var randomMsg = "";
+  resultsMsgText.textContent = resultsMsg;
+  randomMsgText.textContent = randomMsg;
 
   // guessesRemaining needs to be an integer. Not a string.
   guessesRemaining = parseInt(guessesRemaining);
 
-  console.log(guessesRemainingText); // ******* TESTING *******
-  console.log(guessesRemaining); // ******* TESTING *******
 
-  // Determine which key was pressed and then convert it to lowercase for comparing to the array above
+  // Determine which key was pressed and then convert it to lowercase for comparing to the guessesSoFarArray
   var userGuess = event.key;
   var userGuessVetted = userGuess.toLowerCase();
 
   // Verify that the user pressed an alpha character
   if (isAlpha(userGuessVetted) == false) {
-    // If it's not alpha then tell them and return
-    resultsMsg = "Letters only, foe";
-    console.log(resultsMsg); // **** Test ****
+    // If it's not alpha then tell them
+    resultsMsg = "Letters only, my dear foe";
   }
+
   else if (isDuplicate(userGuessVetted) == true) {
     // If it's a duplicate then tell them and return
     resultsMsg = "The Hangman mutters - No duplicates";
-    console.log(resultsMsg); // **** Test ****
   }
+    
   else if ((isAlpha(userGuessVetted) == true) && (isDuplicate(userGuessVetted) == false)) {
-    // if alpha then do everything else, provided the entry isn't a duplicate
+    // if alpha and not a duplicate then do everything else
 
     // Add the entry to the array
     guessesSoFarArray.push(userGuessVetted);
@@ -93,18 +84,42 @@ document.onkeyup = function (event) {
     if (guessesRemaining == 10) {
       // Computer Choice Randomizes EACH TIME there are 10 tries left during each match
       computerChoice = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+      
+      // Convert computerChoice letters to "*" in computerChoiceMasked
+      for (i = 0; i < computerChoice.length; i++) {
+        computerChoiceMasked.charAt(i) = "*";
+      }
 
       // Change key variables
       guessesSoFar = userGuess;
       guessesRemaining = guessesRemaining - 1;
     }
+
     else {
       guessesRemaining = guessesRemaining - 1;
       guessesSoFar = guessesSoFar + ", " + userGuess;
     }
 
+    // Test to see if userGuess is in computerChoice
+    //Replace "*" with userGuess if applicable
+    for (i = 0; i < computerChoice.length; i++) {
+      if (userGuess == computerChoice.charAt(i).toLowerCase() {
+        computerChoiceMasked.charAt(i) = computerChoice.charAt(i);
+      }
+      else {
+        // ignore
+      }
+    }
+
+    // Update remaining computerChoiceMasked in case changes were made
+    wordText.textContent = computerChoiceMasked;
+
+
+
+
+
     // Check for win or loss
-    if (userGuessVetted == computerChoice) {
+    if (computerChoiceMasked == computerChoice) {
       wins++;
       resultsMsg = "You won! Go again.";
       randomMsg = randomMsgArray[Math.floor(Math.random() * randomArray.length)];
@@ -139,14 +154,6 @@ document.onkeyup = function (event) {
   resultsText.textContent = resultsMsg;
   randomText.textContent = randomMsg;
 
-
-  // ******* TESTING ********
-  console.log("userGuess: " + userGuess);
-  console.log("userGuessVetted: " + userGuessVetted);
-  console.log("isAlpha: " + isAlpha(userGuess));
-  console.log("computerChoices.length: " + computerChoices.length);
-  console.log("computerChoice: " + computerChoice);
-  console.log("computerChoices.length - 1: " + (computerChoices.length - 1));
 
 }; // End of document.onkeyup
 
