@@ -34,11 +34,11 @@
               <!-- Jumbotron left side -->
               <div class="col-sm-7 my-jumbotron-left">
                 <h1 class="display-4">Marvel's The Hangman</h1>
-                <p class="lead">There is nothing like putting your neck out before a foe. How about facing The Hangman
+                <p class="lead">There is nothing like stretching your neck out before a foe. How about facing The Hangman
                   himself in his namesake game?</p>
                 <hr>
-                <p id="disappears">You have 10 attempts to guess what Marvel Superhero name that The Hangman has
-                  chosen. When you have your wits about you, press any letter to begin...</p>
+                <p>You have 10 attempts to guess what Marvel Superhero name that The Hangman has
+                  chosen. <span id="htmlDirections">When you have your wits about you, press any letter to begin...</span></p>
 
                 <table class="my-table">
                   <tr>
@@ -92,9 +92,13 @@
                     </td>
                   </tr>
                 </table>
-                <h4 class="text-danger" id="my-result">
+                <h4 class="results" id="my-result">
                   <span id="htmlMessage"></span>
                 </h4>
+                <h5 class="random" id="my-result">
+                  <span id="htmlRandom"></span>
+                </h5>
+
               </div> <!-- End of Jumbotron-Left -->
 
               <!-- Jumbotron right side -->
@@ -132,7 +136,7 @@
     crossorigin="anonymous"></script>
 
   <!-- MY JAVASCRIPT -->
-  <script type="text/javascript" src="assets/js/game.js"></script>
+  <script type="text/javascript" src="assets/javascript/game.js"></script>
 
 </body>
 

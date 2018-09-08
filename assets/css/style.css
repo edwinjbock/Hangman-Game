@@ -14,24 +14,33 @@ h1 {
   color:#c3002f;
 }
 
+.results {
+  color:#c3002f;
+}
 
+.random {
+  color:#c3002f;
+  font-style: italic;
+}
 
 .my-jumbotron-container {
   padding: 0px; 
 }
 
 .my-jumbotron-left {
-    background-color: #4694a5;
-    filter: brightness(130%);
   padding-top: 0 0 0 0;
+  background-color: #5bc0d6;
+  filter: brightness(100%);
 }
 .my-jumbotron-right {
   padding: 0;
   margin: 0;
-  background-color: black
+  background-color: #5bc0d6;
+  filter: brightness(100%);
 }
 
-.my-jumbotron-right table {
+.my-jumbotron-right,
+table {
   margin: 0;
 }
 
@@ -39,7 +48,10 @@ h1 {
   background-color: black;
   max-height: 100%;
   min-height: 100%;
+  max-width: auto;
   padding: 0;
+  /* object-fit: fill; */
+  /* align-content: center; */
 }
 
 .my-table {
@@ -61,4 +73,8 @@ td {
   color: #c3002f;
   font-weight: bold;
   text-align: cemter;
+}
+
+img {
+  filter: brightness(100%);
 }
