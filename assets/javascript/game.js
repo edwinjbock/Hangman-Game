@@ -17,9 +17,9 @@ var winsText = document.getElementById("htmlWins");
 var lossesText = document.getElementById("htmlLosses");
 var guessesRemainingText = document.getElementById("htmlGuessesRemaining");
 var guessesSoFarText = document.getElementById("htmlGuessesSoFar");
-var resultsText = document.getElementById("htmlMessage");
+var resultsMsgText = document.getElementById("htmlMessage");
 var directionsText = document.getElementById("htmlDirections");
-var randomText = document.getElementById("htmlRandom");
+var randomMsgText = document.getElementById("htmlRandom");
 var wordText = document.getElementById("htmlWord");
 
 // Global function to test for an alpha event.key
@@ -30,7 +30,7 @@ function isAlpha(str) {
     // } else { }
   } // end of for loop
   // return false;
-} // end of isAlpha()
+//} // end of isAlpha()
 
 // Global function to test for a duplicate event.key
 function isDuplicate(str) {
@@ -82,12 +82,15 @@ document.onkeyup = function (event) {
     guessesSoFarArray.push(userGuessVetted);
 
     if (guessesRemaining == 10) {
-      // Computer Choice Randomizes EACH TIME there are 10 tries left during each match
+      // computerChoice randomizes using computerChoices EACH TIME there are 10 tries left during each match
       computerChoice = computerChoices[Math.floor(Math.random() * computerChoices.length)];
       
       // Convert computerChoice letters to "*" in computerChoiceMasked
+      // ******* MAGIC BEGINS *******
       for (i = 0; i < computerChoice.length; i++) {
-        computerChoiceMasked.charAt(i) = "*";
+        var masked = "*";
+        computerChoiceMasked = computerChoiceMasked.substr(0, i) + masked + computerChoiceMasked.substr(i + 1);
+        console.log(computerChoiceMasked);
       }
 
       // Change key variables
@@ -100,28 +103,30 @@ document.onkeyup = function (event) {
       guessesSoFar = guessesSoFar + ", " + userGuess;
     }
 
+
     // Test to see if userGuess is in computerChoice
-    //Replace "*" with userGuess if applicable
+    // Then replace "*" in computerChoiceMasked with userGuess if applicable
+    // Do this by creating a whole new computerChoiceMasked
+    // ******* MAGIC CONTINUES *******
     for (i = 0; i < computerChoice.length; i++) {
-      if (userGuess == computerChoice.charAt(i).toLowerCase() {
-        computerChoiceMasked.charAt(i) = computerChoice.charAt(i);
+      if (userGuess == computerChoice.charAt(i)) {
+        computerChoiceMasked = computerChoiceMasked.substr(0, i) + userGuess + computerChoiceMasked.substr(i + 1);
+        console.log(computerChoiceMasked);
       }
       else {
-        // ignore
+        // do nothing
       }
     }
+
 
     // Update remaining computerChoiceMasked in case changes were made
     wordText.textContent = computerChoiceMasked;
 
 
-
-
-
     // Check for win or loss
     if (computerChoiceMasked == computerChoice) {
       wins++;
-      resultsMsg = "You won! Go again.";
+      resultsMsg = "You won? Hmph.";
       randomMsg = randomMsgArray[Math.floor(Math.random() * randomArray.length)];
             //randomMsg = randomArray[randomIndex(randomArray)];
       // Reset malleable variables
