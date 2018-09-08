@@ -23,6 +23,7 @@ var directionsText = document.getElementById("htmlDirections");
 var randomMsgText = document.getElementById("htmlRandom");
 var wordText = document.getElementById("htmlWord");
 
+
 // Global function to test for an alpha event.key
 function isAlpha(str) {
   for (i = 0; i < alphabet.length; i++) {
@@ -33,25 +34,28 @@ function isAlpha(str) {
   return false;
 } // end of isAlpha()
 
+
 // Global function to test for a duplicate event.key
 function isDuplicate(str) {
   for (i = 0; i < guessesSoFarArray.length; i++) {
     if (str === guessesSoFarArray[i]) {
       return true;
     }
-    else { 
-      // nothing
+    else { // nothing
     }
   } // end of for loop
   return false;
 } // end of isDuplicate()
 
+
 // KICK OFF THE GAME WITH A KEYSTROKE
 document.onkeyup = function (event) {
+
 
   // Get rid of the directions
   var directions = "";
   directionsText.textContent = directions;
+
 
   // Clears the You Won/You Lost message after a key is pressed
   var resultsMsg = "";
@@ -67,6 +71,7 @@ document.onkeyup = function (event) {
   // Determine which key was pressed and then convert it to lowercase for comparing to the guessesSoFarArray
   var userGuess = event.key;
   var userGuessVetted = userGuess.toLowerCase();
+
 
   // Verify that the user pressed an alpha character
   if (isAlpha(userGuessVetted) == false) {
@@ -98,6 +103,7 @@ document.onkeyup = function (event) {
         computerChoiceMasked = computerChoiceMasked.substr(0, i) + masked + computerChoiceMasked.substr(i + 1);
         console.log(computerChoiceMasked);
       }
+
 
       // Change key variables
       guessesSoFar = userGuess;
@@ -132,7 +138,7 @@ document.onkeyup = function (event) {
     // Check for win or loss
     if (computerChoiceMasked == computerChoice.toLowerCase()) {
       wins++;
-      resultsMsg = "You won? Hmph.";
+      resultsMsg = "You won? Hmph. Fine. Guess again.";
       randomMsg = randomMsgArray[Math.floor(Math.random() * randomMsgArray.length)];
       // Reset malleable variables
       guessesRemaining = 10;
@@ -145,7 +151,7 @@ document.onkeyup = function (event) {
     // else if ((guessesRemaining < 1) && (isAlpha(userGuessVetted) == true)) {
     else if (guessesRemaining < 1) {
       losses++;
-      resultsMsg = "You lost to " + computerChoice;
+      resultsMsg = "You lost to " + computerChoice + ". Guess again, Little One.";
       randomMsg = randomMsgArray[Math.floor(Math.random() * randomMsgArray.length)];      
       // Reset due to end of match
       guessesRemaining = 10;
@@ -154,6 +160,7 @@ document.onkeyup = function (event) {
       wordText.textContent = "";
       // computerChoiceMasked = "";
     }
+      
     else { } // do nothing
 
   }
