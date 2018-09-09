@@ -11,7 +11,7 @@ var computerChoice = "";
 var computerChoiceMasked = "";
 var guessesSoFar = "";
 var guessesSoFarArray = [];
-var randomMsgArray = ["BTW, Thor says you're adopted", "Loki killed 80 people in two days and you're next", "The Mandarin says you'll never see him coming", "Hulk yells smash", "Captain America says he can do this all day", "And Stark says we have a Hulk", "I am Groot. You're not.", "Daredevil reassures you that violence does not discriminate", "Wolverine says that if you cage the beast, the beast will get angry", "Spiderman says that no man can win every battle"]
+var randomMsgArray = ["BTW, Thor says you're adopted", "Loki killed 80 people in two days... and you're next", "The Mandarin says you'll never see him coming", "Hulk yells smash", "Captain America says he can do this all day", "And Stark says we have a Hulk", "I am Groot. You're not.", "Daredevil reassures you that violence does not discriminate", "Wolverine says that if you cage the beast, the beast will get angry", "Spiderman says that no man can win every battle"]
 
 // Variables that refer to the HTML
 var winsText = document.getElementById("htmlWins");
@@ -81,7 +81,7 @@ document.onkeyup = function (event) {
 
   else if (isDuplicate(userGuessVetted) == true) {
     // If it's a duplicate then tell them and return
-    resultsMsg = "The Hangman mutters - No duplicates";
+    resultsMsg = "The Hangman mutters menacingly. No duplicates.";
   }
     
   else if ((isAlpha(userGuessVetted) == true) && (isDuplicate(userGuessVetted) == false)) {
