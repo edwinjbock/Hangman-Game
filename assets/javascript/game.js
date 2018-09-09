@@ -138,7 +138,7 @@ document.onkeyup = function (event) {
     // Check for win or loss
     if (computerChoiceMasked == computerChoice.toLowerCase()) {
       wins++;
-      resultsMsg = "You won? Hmph. Fine. Guess again.";
+      resultsMsg = computerChoice + ". You won? Fine. Guess again.";
       randomMsg = randomMsgArray[Math.floor(Math.random() * randomMsgArray.length)];
       // Reset malleable variables
       guessesRemaining = 10;
