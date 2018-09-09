@@ -29,13 +29,13 @@ h1 {
 
 .my-jumbotron-left {
   padding-top: 0 0 0 0;
-  background-color: #5bc0d6;
+  background-color: #d5b79f; /* #5bc0d6; */
   filter: brightness(100%);
 }
 .my-jumbotron-right {
   padding: 0;
   margin: 0;
-  background-color: #5bc0d6;
+  background-color: #d5b79f; /* #5bc0d6; */
   filter: brightness(100%);
   overflow: hidden;
 }
@@ -47,7 +47,8 @@ table {
 .my-jumbotron-right {
   margin: 0;
   display:block;
-  background-color: #5bc0d6;
+  background-color: #d5b79f; /* #5bc0d6; */
+
 }
 
 .my-image-container {
