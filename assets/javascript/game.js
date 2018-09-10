@@ -69,7 +69,8 @@ document.onkeyup = function (event) {
 
 
   // Determine which key was pressed and then convert it to lowercase for comparing to the guessesSoFarArray
-  var userGuess = event.key;
+  // Convert event.key to Lowercase
+  var userGuess = event.key.toLowerCase();
   var userGuessVetted = userGuess.toLowerCase();
 
 
@@ -138,7 +139,7 @@ document.onkeyup = function (event) {
     // Check for win or loss
     if (computerChoiceMasked == computerChoice.toLowerCase()) {
       wins++;
-      resultsMsg = computerChoice + ". You won? Fine. Guess again.";
+      resultsMsg = computerChoice + ". You won?! Hmph. Guess again.";
       randomMsg = randomMsgArray[Math.floor(Math.random() * randomMsgArray.length)];
       // Reset malleable variables
       guessesRemaining = 10;
